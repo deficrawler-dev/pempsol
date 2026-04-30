@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$PEMP — The Drippiest Token on Solana</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1db85a;
+    --dark-green: #14863f;
+    --lime: #6ee048;
+    --black: #111111;
+    --white: #ffffff;
+    --offwhite: #f2f7f3;
+    --yellow: #f5a800;
+    --blue-drip: #3ba9e0;
+    --text: #111111;
+    --muted: #555555;
+    --border: rgba(0,0,0,0.09);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--green);
+    color: #fff;
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 300;
+  }
+  .ticker-inner { display: inline-block; animation: ticker 22s linear infinite; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 38px; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.3s ease;
+  }
+  .nav-logo { font-family: 'Bangers', cursive; font-size: 2rem; color: var(--green); letter-spacing: 0.1em; text-decoration: none; }
+  .nav-logo span { color: var(--black); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-btn { background: var(--green); color: #fff; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 0.08em; text-decoration: none; transition: all 0.2s; }
+  .nav-btn:hover { background: var(--dark-green); transform: scale(1.04); }
+
+  /* HERO */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 9rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(29,184,90,0.08) 0%, transparent 70%);
+    z-index: 0;
+  }
+  /* hand-drawn background squiggles */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 60px,
+        rgba(29,184,90,0.04) 60px,
+        rgba(29,184,90,0.04) 62px
+      );
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards; }
+  .hero-title { font-family: 'Bangers', cursive; font-size: clamp(5rem, 15vw, 12rem); line-height: 0.9; letter-spacing: 0.05em; color: var(--black); opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
+  .hero-title .green { color: var(--green); }
+  .hero-title .drip { display: inline-block; position: relative; }
+  .hero-title .drip::after {
+    content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 20px; background: var(--blue-drip); border-radius: 0 0 8px 8px;
+    animation: drip 2s ease-in-out infinite;
+  }
+  @keyframes drip { 0%,100% { height: 16px; } 50% { height: 32px; opacity: 0.6; } }
+  .hero-sub { font-family: 'Permanent Marker', cursive; font-size: clamp(1rem, 3vw, 1.6rem); color: var(--yellow); margin-top: 1.5rem; opacity: 0; animation: fadeUp 0.7s ease 0.6s forwards; }
+  .hero-mascot { width: clamp(200px, 28vw, 360px); margin: 2rem auto 0; display: block; filter: drop-shadow(0 16px 40px rgba(29,184,90,0.2)); opacity: 0; animation: heroFloat 3.5s ease-in-out infinite, fadeUp 0.8s ease 0.8s forwards; }
+  @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-18px) rotate(1.5deg); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-ctas { margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s ease 1.1s forwards; }
+
+  /* CA */
+  .ca-section { text-align: center; padding: 4rem 2rem; background: var(--offwhite); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .ca-label { font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 0.2em; color: var(--green); margin-bottom: 1rem; }
+  .ca-box { display: inline-flex; align-items: center; gap: 1rem; background: #fff; border: 2px solid rgba(29,184,90,0.3); border-radius: 8px; padding: 1rem 1.5rem; max-width: 100%; flex-wrap: wrap; justify-content: center; box-shadow: 0 2px 16px rgba(29,184,90,0.08); }
+  .ca-address { font-family: 'Space Mono', monospace; font-size: clamp(0.55rem, 1.8vw, 0.82rem); color: var(--dark-green); word-break: break-all; letter-spacing: 0.04em; }
+  .copy-btn { background: var(--green); color: #fff; border: none; padding: 0.4rem 1rem; border-radius: 4px; font-family: 'Bangers', cursive; font-size: 1rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .copy-btn:hover { background: var(--dark-green); transform: scale(1.05); }
+  .copy-btn.copied { background: var(--blue-drip); }
+
+  /* PARALLAX */
+  .parallax-section { overflow: hidden; padding: 5rem 0; position: relative; background: var(--white); }
+  .parallax-section::before, .parallax-section::after { content: ''; position: absolute; left: 0; right: 0; height: 80px; z-index: 2; pointer-events: none; }
+  .parallax-section::before { top: 0; background: linear-gradient(to bottom, var(--white), transparent); }
+  .parallax-section::after { bottom: 0; background: linear-gradient(to top, var(--white), transparent); }
+  .parallax-row { display: flex; align-items: flex-end; gap: 3rem; padding: 0 3rem; justify-content: center; flex-wrap: wrap; }
+  .parallax-item { flex-shrink: 0; text-align: center; will-change: transform; }
+  .parallax-item img { width: 170px; height: 170px; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12)); border-radius: 16px; display: block; background: var(--offwhite); }
+  .parallax-item .caption { font-family: 'Permanent Marker', cursive; font-size: 0.75rem; color: var(--green); margin-top: 0.5rem; }
+
+  /* SECTIONS */
+  .section-wrap { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-wrap.alt { background: var(--offwhite); max-width: 100%; }
+  .section-wrap.alt-inner { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-heading { font-family: 'Bangers', cursive; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 0.08em; margin-bottom: 3rem; text-align: center; color: var(--black); }
+  .section-heading .accent { color: var(--green); }
+
+  /* QUOTES */
+  .quotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .quote-card { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 1.75rem; position: relative; overflow: hidden; transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+  .quote-card:hover { transform: translateY(-5px) rotate(-0.4deg); border-color: rgba(29,184,90,0.4); box-shadow: 0 8px 32px rgba(29,184,90,0.12); }
+  .quote-card::before { content: '"'; font-family: 'Bangers', cursive; font-size: 8rem; color: rgba(29,184,90,0.08); position: absolute; top: -1rem; left: 0.5rem; line-height: 1; pointer-events: none; }
+  .quote-text { font-family: 'Permanent Marker', cursive; font-size: 1rem; line-height: 1.65; color: var(--text); position: relative; z-index: 1; }
+  .quote-pemp { width: 55px; height: 55px; object-fit: contain; margin-top: 1rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+
+  /* AIRDROP */
+  .airdrop-wrap { max-width: 1000px; margin: 0 auto 6rem; padding: 0 2rem; }
+  .airdrop-card { background: linear-gradient(135deg, rgba(29,184,90,0.07), rgba(59,169,224,0.04)); border: 1.5px solid rgba(29,184,90,0.2); border-radius: 20px; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 4px 40px rgba(29,184,90,0.08); }
+  .airdrop-card::before { content: '🪂'; font-size: 10rem; position: absolute; right: -1rem; top: -2rem; opacity: 0.06; pointer-events: none; }
+  .airdrop-img { width: 180px; filter: drop-shadow(0 10px 30px rgba(29,184,90,0.25)); animation: heroFloat 4s ease-in-out infinite; margin: 0 auto 1.5rem; display: block; }
+  .airdrop-title { font-family: 'Bangers', cursive; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 0.1em; color: var(--green); margin-bottom: 1rem; }
+  .dev-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(29,184,90,0.08); border: 1px solid rgba(29,184,90,0.25); border-radius: 100px; padding: 0.6rem 1.25rem; margin-bottom: 1.5rem; }
+  .dev-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.4); } }
+  .dev-badge span { font-size: 0.8rem; color: var(--dark-green); letter-spacing: 0.1em; font-weight: 700; }
+  .airdrop-text { font-size: 0.9rem; line-height: 1.9; color: var(--muted); max-width: 600px; margin: 0 auto 2rem; }
+
+  /* BUTTONS */
+  .cta-btn { display: inline-block; background: var(--green); color: #fff; font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 0.1em; padding: 0.75rem 2.25rem; border-radius: 6px; text-decoration: none; transition: all 0.2s; margin: 0.4rem; }
+  .cta-btn:hover { background: var(--dark-green); transform: scale(1.05) rotate(-1deg); }
+  .cta-btn.secondary { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+  .cta-btn.secondary:hover { border-color: var(--green); color: var(--green); background: transparent; }
+
+  /* STEPS */
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+  .step-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+  .step-card:hover { transform: translateY(-6px); border-color: rgba(29,184,90,0.35); box-shadow: 0 8px 28px rgba(29,184,90,0.1); }
+  .step-num { font-family: 'Bangers', cursive; font-size: 4rem; color: var(--green); line-height: 1; margin-bottom: 0.75rem; }
+  .step-title { font-family: 'Permanent Marker', cursive; font-size: 1.05rem; color: var(--black); margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; background: var(--offwhite); }
+  .footer-logo { font-family: 'Bangers', cursive; font-size: 2.5rem; color: var(--green); letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green); }
+  .footer-mascot { width: 70px; display: block; margin: 1.5rem auto; opacity: 0.55; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+  .footer-disclaimer { font-size: 0.65rem; color: rgba(0,0,0,0.3); max-width: 600px; margin: 0 auto; line-height: 1.9; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    nav { padding: 0.75rem 1.25rem; }
+    .parallax-row { gap: 1.5rem; }
+    .parallax-item img { width: 120px; height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    $PEMP TO THE MOON &nbsp;💧&nbsp; GET RICH OR CRY TRYING &nbsp;💧&nbsp; THE FROG DRIPS DIFFERENT &nbsp;💧&nbsp; CA: C3MVMiw25M8WUuZKpwzbHqtjsTdHKpzJcrozBNsDpump &nbsp;💧&nbsp; @pempsol &nbsp;💧&nbsp; AIRDROP SZNOOOOON &nbsp;💧&nbsp; $PEMP TO THE MOON &nbsp;💧&nbsp; GET RICH OR CRY TRYING &nbsp;💧&nbsp; THE FROG DRIPS DIFFERENT &nbsp;💧&nbsp; CA: C3MVMiw25M8WUuZKpwzbHqtjsTdHKpzJcrozBNsDpump &nbsp;💧&nbsp; @pempsol &nbsp;💧&nbsp; AIRDROP SZNOOOOON &nbsp;💧&nbsp;
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#">PEMP<span>.fun</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#airdrop">Airdrop</a></li>
+    <li><a href="#buy">How to Buy</a></li>
+  </ul>
+  <a class="nav-btn" href="https://x.com/pempsol" target="_blank">Twitter / X</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero-section">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">The drippiest token on Solana</p>
+    <h1 class="hero-title"><span class="green">$</span><span class="drip">PEMP</span></h1>
+    <p class="hero-sub">He drools. He hodls. He WINS. 💧</p>
+    <img class="hero-mascot" src="hero image.png" alt="Pemp mascot" />
+    <div class="hero-ctas">
+      <a class="cta-btn" href="#buy">Buy $PEMP</a>
+      <a class="cta-btn secondary" href="https://x.com/pempsol" target="_blank">Follow @pempsol</a>
+    </div>
+  </div>
+</div>
+
+<!-- CA -->
+<div class="ca-section">
+  <p class="ca-label">🔑 Contract Address (CA)</p>
+  <div class="ca-box">
+    <span class="ca-address">C3MVMiw25M8WUuZKpwzbHqtjsTdHKpzJcrozBNsDpump</span>
+    <button class="copy-btn" onclick="copyCA()">Copy CA</button>
+  </div>
+</div>
+
+<!-- PARALLAX GALLERY -->
+<div class="parallax-section" id="parallax-zone">
+  <div class="parallax-row">
+    <div class="parallax-item" data-speed="0.25">
+      <img src="pemp 1.png" alt="Pemp" />
+      <div class="caption">gm fren 💧</div>
+    </div>
+    <div class="parallax-item" data-speed="-0.3">
+      <img src="pemp 2.jpeg" alt="Pemp" />
+      <div class="caption">send it</div>
+    </div>
+    <div class="parallax-item" data-speed="0.45">
+      <img src="pemp 3.png" alt="Pemp" />
+      <div class="caption">bullish 👀</div>
+    </div>
+    <div class="parallax-item" data-speed="-0.2">
+      <img src="pemp 4.png" alt="Pemp" />
+      <div class="caption">missed entry 😭</div>
+    </div>
+    <div class="parallax-item" data-speed="0.35">
+      <img src="pemp 5.jpeg" alt="Pemp" />
+      <div class="caption">speed run 🚀</div>
+    </div>
+    <div class="parallax-item" data-speed="-0.4">
+      <img src="pemp 6.jpeg" alt="Pemp" />
+      <div class="caption">scheming...</div>
+    </div>
+    <div class="parallax-item" data-speed="0.2">
+      <img src="pemp 7.jpeg" alt="Pemp" />
+      <div class="caption">hopium max</div>
+    </div>
+    <div class="parallax-item" data-speed="-0.15">
+      <img src="pemp 8.png" alt="Pemp" />
+      <div class="caption">wen moon 🌕</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTES -->
+<div style="background: var(--offwhite); padding: 1px 0;">
+  <div class="section-wrap" id="about">
+    <h2 class="section-heading reveal">PEMP <span class="accent">WISDOM</span> 🧠</h2>
+    <div class="quotes-grid">
+      <div class="quote-card reveal">
+        <p class="quote-text">My financial advisor said "diversify." I put 50% in $PEMP and 50% in... more $PEMP. No notes.</p>
+        <img class="quote-pemp" src="pemp 6.jpeg" alt="Pemp" />
+      </div>
+      <div class="quote-card reveal" style="transition-delay:0.1s">
+        <p class="quote-text">Bitcoin had pizza. Ethereum had monkeys. $PEMP has a crying green frog. Peak culture, honestly.</p>
+        <img class="quote-pemp" src="pemp 3.png" alt="Pemp" />
+      </div>
+      <div class="quote-card reveal" style="transition-delay:0.2s">
+        <p class="quote-text">I asked my wife if she wants Lamborghini green or $PEMP green for the bedroom. She left. I bought more PEMP.</p>
+        <img class="quote-pemp" src="pemp 8.png" alt="Pemp" />
+      </div>
+      <div class="quote-card reveal" style="transition-delay:0.3s">
+        <p class="quote-text">They said buy the dip. I cried at the bar instead. Then it 10x'd. The drip never lies, fren.</p>
+        <img class="quote-pemp" src="pemp 4.png" alt="Pemp" />
+      </div>
+      <div class="quote-card reveal" style="transition-delay:0.4s">
+        <p class="quote-text">Buffett says be fearful when others are greedy. Pemp says be drooling when others are sleeping.</p>
+        <img class="quote-pemp" src="pemp 5.jpeg" alt="Pemp" />
+      </div>
+      <div class="quote-card reveal" style="transition-delay:0.5s">
+        <p class="quote-text">Not financial advice. This is emotional damage in a green jumpsuit with questionable drool physics.</p>
+        <img class="quote-pemp" src="pemp 1.png" alt="Pemp" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AIRDROP -->
+<div class="airdrop-wrap" style="margin-top: 6rem;" id="airdrop">
+  <div class="airdrop-card reveal">
+    <img class="airdrop-img" src="airdrop image.jpeg" alt="Pemp airdrop" />
+    <h2 class="airdrop-title">Airdrop Incoming 🪂</h2>
+    <div class="dev-badge">
+      <div class="dev-dot"></div>
+      <span>Dev: @cryptokillua99</span>
+    </div>
+    <p class="airdrop-text">
+      The dev <strong style="color:var(--dark-green)">@cryptokillua99</strong> is cooking airdrops for the true believers —
+      the ones who held through the tears, the bar scenes, and the rug-that-wasn't.
+      Hold $PEMP. Follow the dev. Get rewarded. The drip is real. 💧
+    </p>
+    <div>
+      <a class="cta-btn" href="https://x.com/cryptokillua99" target="_blank">Follow Dev @cryptokillua99</a>
+      <a class="cta-btn secondary" href="https://x.com/pempsol" target="_blank">Follow @pempsol</a>
+    </div>
+  </div>
+</div>
+
+<!-- HOW TO BUY -->
+<div style="background: var(--offwhite); padding: 1px 0;">
+  <div class="section-wrap" id="buy">
+    <h2 class="section-heading reveal">How to <span class="accent">Buy</span></h2>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Get a Solana Wallet</div>
+        <p class="step-desc">Download Phantom or Solflare. Create your wallet. Guard that seed phrase like Pemp guards his gifts.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.1s">
+        <div class="step-num">02</div>
+        <div class="step-title">Buy Some SOL</div>
+        <p class="step-desc">Grab SOL from Binance, Coinbase, or any CEX. Send it to your wallet. Don't fumble the bag.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.2s">
+        <div class="step-num">03</div>
+        <div class="step-title">Go to Jupiter or Raydium</div>
+        <p class="step-desc">Open jup.ag or raydium.io. Connect your wallet. Paste the $PEMP contract address below.</p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.3s">
+        <div class="step-num">04</div>
+        <div class="step-title">Swap for $PEMP</div>
+        <p class="step-desc">Paste the CA, set slippage to ~5%, confirm swap. Welcome to the drip family, fren. 💧</p>
+      </div>
+    </div>
+    <div style="margin-top:3rem; text-align:center;" class="reveal">
+      <p style="font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; margin-bottom:1rem; text-transform:uppercase;">Contract Address</p>
+      <div class="ca-box" style="display:inline-flex;">
+        <span class="ca-address">C3MVMiw25M8WUuZKpwzbHqtjsTdHKpzJcrozBNsDpump</span>
+        <button class="copy-btn" onclick="copyCA()">Copy CA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PEMP.fun</div>
+  <div class="footer-links">
+    <a href="https://x.com/pempsol" target="_blank">Twitter / X</a>
+    <a href="https://x.com/cryptokillua99" target="_blank">Dev @cryptokillua99</a>
+    <a href="#buy">Buy $PEMP</a>
+    <a href="#airdrop">Airdrop</a>
+  </div>
+  <img class="footer-mascot" src="pemp 2.jpeg" alt="Pemp" />
+  <p class="footer-disclaimer">
+    $PEMP is a meme token on the Solana blockchain. This is not financial advice.
+    Do your own research. Crypto is risky. Pemp is riskier. We are not responsible
+    for your emotional investment, losses, or any tears — blue or otherwise.
+    Just vibes. Just drips. Just PEMP. 💚
+  </p>
+</footer>
+
+<script>
+  function copyCA() {
+    navigator.clipboard.writeText('C3MVMiw25M8WUuZKpwzbHqtjsTdHKpzJcrozBNsDpump').then(() => {
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.textContent = 'Copied! ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy CA'; btn.classList.remove('copied'); }, 2000);
+      });
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  const parallaxItems = document.querySelectorAll('.parallax-item');
+  const zone = document.getElementById('parallax-zone');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const zoneTop = zone.offsetTop;
+    const rel = scrollY - zoneTop + window.innerHeight;
+    if (rel > 0 && rel < zone.offsetHeight + window.innerHeight) {
+      parallaxItems.forEach(item => {
+        const speed = parseFloat(item.dataset.speed) || 0.2;
+        item.style.transform = `translateY(${rel * speed * 0.35}px)`;
+      });
+    }
+  });
+
+  let lastScroll = 0;
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    nav.style.transform = (cur > lastScroll && cur > 100) ? 'translateY(-100%)' : 'translateY(0)';
+    lastScroll = cur;
+  });
+</script>
+</body>
+</html>
