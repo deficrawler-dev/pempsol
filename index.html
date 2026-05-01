@@ -133,7 +133,14 @@
   .parallax-section::after { bottom: 0; background: linear-gradient(to top, var(--white), transparent); }
   .parallax-row { display: flex; align-items: flex-end; gap: 3rem; padding: 0 3rem; justify-content: center; flex-wrap: wrap; }
   .parallax-item { flex-shrink: 0; text-align: center; will-change: transform; }
-  .parallax-item img { width: 170px; height: 170px; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12)); border-radius: 16px; display: block; background: transparent; mix-blend-mode: multiply; }
+  .parallax-item img {
+    width: 170px; height: 170px; object-fit: contain;
+    border-radius: 16px; display: block;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    mix-blend-mode: normal;
+    padding: 10px;
+  }
   .parallax-item .caption { font-family: 'Permanent Marker', cursive; font-size: 0.75rem; color: var(--green); margin-top: 0.5rem; }
 
   /* SECTIONS */
@@ -149,7 +156,15 @@
   .quote-card:hover { transform: translateY(-5px) rotate(-0.4deg); border-color: rgba(29,184,90,0.4); box-shadow: 0 8px 32px rgba(29,184,90,0.12); }
   .quote-card::before { content: '"'; font-family: 'Bangers', cursive; font-size: 8rem; color: rgba(29,184,90,0.08); position: absolute; top: -1rem; left: 0.5rem; line-height: 1; pointer-events: none; }
   .quote-text { font-family: 'Permanent Marker', cursive; font-size: 1rem; line-height: 1.65; color: var(--text); position: relative; z-index: 1; }
-  .quote-pemp { width: 55px; height: 55px; object-fit: contain; margin-top: 1rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); mix-blend-mode: multiply; }
+  .quote-pemp {
+    width: 60px; height: 60px; object-fit: contain;
+    margin-top: 1rem; display: block;
+    background: #fff;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+    mix-blend-mode: normal;
+  }
 
   /* AIRDROP */
   .airdrop-wrap { max-width: 1000px; margin: 0 auto 6rem; padding: 0 2rem; }
@@ -182,7 +197,6 @@
   .airdrop-list-item { display: grid; grid-template-columns: 18px 1fr; gap: 0.6rem; align-items: flex-start; font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
   .airdrop-list-item .drop-icon { color: var(--blue-drip); font-size: 0.9rem; margin-top: 3px; }
   .airdrop-list-item span { flex: 1; }
-  
 
   /* FOOTER */
   footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; background: var(--offwhite); }
@@ -360,7 +374,7 @@
       <p style="font-size:0.72rem; color:var(--green); font-weight:700; margin-top:0.75rem; letter-spacing:0.08em;">— @cryptokillua99</p>
     </div>
 
-    <!-- How it works — FIXED -->
+    <!-- How it works -->
     <div style="max-width:600px; margin:0 auto 2rem; text-align:left;">
       <p style="font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:0.1em; color:var(--black); margin-bottom:0.75rem;">How airdrops are allocated:</p>
       <div class="airdrop-list">
