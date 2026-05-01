@@ -66,7 +66,7 @@
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { color: var(--text); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--green); }
-  .nav-btn { background: var(--green); color: #fff; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 0.08em; text-decoration: none; transition: all 0.2s; }
+  .nav-btn { background: var(--green); color: #fff; padding: 0.5rem 1.2rem; border-radius: 4px; font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 0.08em; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
   .nav-btn:hover { background: var(--dark-green); transform: scale(1.04); }
 
   /* HERO */
@@ -87,7 +87,6 @@
     background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(29,184,90,0.08) 0%, transparent 70%);
     z-index: 0;
   }
-  /* hand-drawn background squiggles */
   .hero-bg::after {
     content: '';
     position: absolute; inset: 0;
@@ -178,6 +177,12 @@
   .step-title { font-family: 'Permanent Marker', cursive; font-size: 1.05rem; color: var(--black); margin-bottom: 0.5rem; }
   .step-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
 
+  /* AIRDROP LIST */
+  .airdrop-list { display: flex; flex-direction: column; gap: 0.85rem; max-width: 600px; margin: 0 auto 2rem; text-align: left; }
+  .airdrop-list-item { display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+  .airdrop-list-item .drop-icon { flex-shrink: 0; margin-top: 2px; font-size: 1rem; }
+  .airdrop-list-item span { flex: 1; }
+
   /* FOOTER */
   footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; background: var(--offwhite); }
   .footer-logo { font-family: 'Bangers', cursive; font-size: 2.5rem; color: var(--green); letter-spacing: 0.1em; margin-bottom: 1rem; }
@@ -196,6 +201,7 @@
     nav { padding: 0.75rem 1.25rem; }
     .parallax-row { gap: 1.5rem; }
     .parallax-item img { width: 120px; height: 120px; }
+    .airdrop-card { padding: 2.5rem 1.5rem; }
   }
 </style>
 </head>
@@ -267,7 +273,7 @@
       <div class="caption">speed run 🚀</div>
     </div>
     <div class="parallax-item" data-speed="-0.4">
-      <img src="pemp 6.jpeg" alt="Pemp" />
+      <img src="pemp 6.png" alt="Pemp" />
       <div class="caption">scheming...</div>
     </div>
     <div class="parallax-item" data-speed="0.2">
@@ -288,7 +294,7 @@
     <div class="quotes-grid">
       <div class="quote-card reveal">
         <p class="quote-text">My financial advisor said "diversify." I put 50% in $PEMP and 50% in... more $PEMP. No notes.</p>
-        <img class="quote-pemp" src="pemp 6.jpeg" alt="Pemp" />
+        <img class="quote-pemp" src="pemp 6.png" alt="Pemp" />
       </div>
       <div class="quote-card reveal" style="transition-delay:0.1s">
         <p class="quote-text">Bitcoin had pizza. Ethereum had monkeys. $PEMP has a crying green frog. Peak culture, honestly.</p>
@@ -317,7 +323,7 @@
 <!-- AIRDROP -->
 <div class="airdrop-wrap" style="margin-top: 6rem;" id="airdrop">
   <div class="airdrop-card reveal">
-    <img class="airdrop-img" src="airdrop image.jpeg" alt="Pemp airdrop" />
+    <img class="airdrop-img" src="airdrop image.png" alt="Pemp airdrop" />
     <h2 class="airdrop-title">The Airdrop You Need 🪂</h2>
     <div class="dev-badge">
       <div class="dev-dot"></div>
@@ -353,25 +359,25 @@
       <p style="font-size:0.72rem; color:var(--green); font-weight:700; margin-top:0.75rem; letter-spacing:0.08em;">— @cryptokillua99</p>
     </div>
 
-    <!-- How it works -->
+    <!-- How it works — FIXED -->
     <div style="max-width:600px; margin:0 auto 2rem; text-align:left;">
       <p style="font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:0.1em; color:var(--black); margin-bottom:0.75rem;">How airdrops are allocated:</p>
-      <div style="display:flex; flex-direction:column; gap:0.6rem;">
-        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
-          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
-          Rewarding <strong style="color:var(--text)">pumpfun traders</strong> based on volume, hold time, and how dormant you are.
+      <div class="airdrop-list">
+        <div class="airdrop-list-item">
+          <span class="drop-icon">💧</span>
+          <span>Rewarding <strong style="color:var(--text)">pumpfun traders</strong> based on volume, hold time, and how dormant you are.</span>
         </div>
-        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
-          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
-          Not a one-time snapshot — <strong style="color:var(--text)">ongoing distribution</strong> based on actual behavior and participation.
+        <div class="airdrop-list-item">
+          <span class="drop-icon">💧</span>
+          <span>Not a one-time snapshot — <strong style="color:var(--text)">ongoing distribution</strong> based on actual behavior and participation.</span>
         </div>
-        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
-          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
-          Buy between <strong style="color:var(--text)">$10–$50</strong>, post your wallet with proof on X — dev will double your supply if you're still holding.
+        <div class="airdrop-list-item">
+          <span class="drop-icon">💧</span>
+          <span>Buy between <strong style="color:var(--text)">$10–$50</strong>, post your wallet with proof on X — dev will double your supply if you're still holding.</span>
         </div>
-        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
-          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
-          <strong style="color:var(--text)">Small buyers will be rewarded too.</strong> I'm not just trying to run a coin, I'm trying to change lives.
+        <div class="airdrop-list-item">
+          <span class="drop-icon">💧</span>
+          <span><strong style="color:var(--text)">Small buyers will be rewarded too.</strong> I'm not just trying to run a coin, I'm trying to change lives.</span>
         </div>
       </div>
     </div>
