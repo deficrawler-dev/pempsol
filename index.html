@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$PEMP — The Drippiest Token on Solana</title>
+<link rel="icon" type="image/png" href="hero image.png" />
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -215,7 +216,7 @@
     <li><a href="#airdrop">Airdrop</a></li>
     <li><a href="#buy">How to Buy</a></li>
   </ul>
-  <a class="nav-btn" href="https://x.com/pempsol" target="_blank">Twitter / X</a>
+  <button class="nav-btn" onclick="copyCA()">Copy CA 📋</button>
 </nav>
 
 <!-- HERO -->
@@ -317,16 +318,64 @@
 <div class="airdrop-wrap" style="margin-top: 6rem;" id="airdrop">
   <div class="airdrop-card reveal">
     <img class="airdrop-img" src="airdrop image.jpeg" alt="Pemp airdrop" />
-    <h2 class="airdrop-title">Airdrop Incoming 🪂</h2>
+    <h2 class="airdrop-title">The Airdrop You Need 🪂</h2>
     <div class="dev-badge">
       <div class="dev-dot"></div>
-      <span>Dev: @cryptokillua99</span>
+      <span>Dev: @cryptokillua99 — live & dropping</span>
     </div>
+
     <p class="airdrop-text">
-      The dev <strong style="color:var(--dark-green)">@cryptokillua99</strong> is cooking airdrops for the true believers —
-      the ones who held through the tears, the bar scenes, and the rug-that-wasn't.
-      Hold $PEMP. Follow the dev. Get rewarded. The drip is real. 💧
+      $PEMP is by the people, for the people. Not allocated to insiders, not pre-distributed behind closed doors.
+      <strong style="color:var(--dark-green)">51% of the supply has already been bought from the market</strong> and will be distributed back to holders and believers over time.
     </p>
+
+    <!-- Airdrop stats strip -->
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+      <div style="background:#fff; border:1.5px solid rgba(29,184,90,0.2); border-radius:12px; padding:1rem 1.5rem; min-width:140px; box-shadow:0 2px 12px rgba(29,184,90,0.07);">
+        <div style="font-family:'Bangers',cursive; font-size:2rem; color:var(--green); line-height:1;">DONE ✅</div>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:0.3rem; font-weight:700; letter-spacing:0.08em;">1ST AIRDROP — 1% TOTAL</div>
+      </div>
+      <div style="background:#fff; border:1.5px solid rgba(29,184,90,0.2); border-radius:12px; padding:1rem 1.5rem; min-width:140px; box-shadow:0 2px 12px rgba(29,184,90,0.07);">
+        <div style="font-family:'Bangers',cursive; font-size:2rem; color:var(--green); line-height:1;">0.25%</div>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:0.3rem; font-weight:700; letter-spacing:0.08em;">PER RECIPIENT</div>
+      </div>
+      <div style="background:#fff; border:1.5px solid rgba(29,184,90,0.2); border-radius:12px; padding:1rem 1.5rem; min-width:140px; box-shadow:0 2px 12px rgba(29,184,90,0.07);">
+        <div style="font-family:'Bangers',cursive; font-size:2rem; color:var(--green); line-height:1;">$10–$50</div>
+        <div style="font-size:0.7rem; color:var(--muted); margin-top:0.3rem; font-weight:700; letter-spacing:0.08em;">SMALL BUYERS REWARDED</div>
+      </div>
+    </div>
+
+    <!-- Vision quote -->
+    <div style="background:#fff; border-left:4px solid var(--green); border-radius:0 12px 12px 0; padding:1.25rem 1.5rem; max-width:560px; margin:0 auto 2rem; text-align:left; box-shadow:0 2px 12px rgba(29,184,90,0.07);">
+      <p style="font-family:'Permanent Marker',cursive; font-size:0.95rem; line-height:1.7; color:var(--text);">
+        "Imagine this: $10M+ market cap... You only hold $50... And you receive a 0.1% airdrop ($10K). That's the vision. We're playing the long term game this time."
+      </p>
+      <p style="font-size:0.72rem; color:var(--green); font-weight:700; margin-top:0.75rem; letter-spacing:0.08em;">— @cryptokillua99</p>
+    </div>
+
+    <!-- How it works -->
+    <div style="max-width:600px; margin:0 auto 2rem; text-align:left;">
+      <p style="font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:0.1em; color:var(--black); margin-bottom:0.75rem;">How airdrops are allocated:</p>
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
+          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
+          Rewarding <strong style="color:var(--text)">pumpfun traders</strong> based on volume, hold time, and how dormant you are.
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
+          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
+          Not a one-time snapshot — <strong style="color:var(--text)">ongoing distribution</strong> based on actual behavior and participation.
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
+          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
+          Buy between <strong style="color:var(--text)">$10–$50</strong>, post your wallet with proof on X — dev will double your supply if you're still holding.
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.8rem; color:var(--muted); line-height:1.6;">
+          <span style="color:var(--green); font-size:1rem; flex-shrink:0;">💧</span>
+          <strong style="color:var(--text)">Small buyers will be rewarded too.</strong> I'm not just trying to run a coin, I'm trying to change lives.
+        </div>
+      </div>
+    </div>
+
     <div>
       <a class="cta-btn" href="https://x.com/cryptokillua99" target="_blank">Follow Dev @cryptokillua99</a>
       <a class="cta-btn secondary" href="https://x.com/pempsol" target="_blank">Follow @pempsol</a>
